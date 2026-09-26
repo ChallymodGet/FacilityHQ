@@ -1,0 +1,151 @@
+@import "tailwindcss";
+@import "../styles/tokens.css";
+
+/* Map Sunbeth design tokens onto Tailwind utilities (v4 @theme). */
+@theme inline {
+  --font-sans: var(--font-host-grotesk), "Host Grotesk", system-ui, sans-serif;
+  --font-secondary: Tahoma, Geneva, Verdana, sans-serif;
+
+  --color-white: var(--foundations-white);
+  --color-black: var(--foundations-black);
+
+  --color-primary-100: var(--primary-100);
+  --color-primary-200: var(--primary-200);
+  --color-primary-300: var(--primary-300);
+  --color-primary-400: var(--primary-400);
+  --color-primary-500: var(--primary-500);
+  --color-primary-600: var(--primary-600);
+  --color-primary-700: var(--primary-700);
+  --color-primary-800: var(--primary-800);
+  --color-primary-900: var(--primary-900);
+
+  --color-secondary-100: var(--secondary-100);
+  --color-secondary-200: var(--secondary-200);
+  --color-secondary-300: var(--secondary-300);
+  --color-secondary-400: var(--secondary-400);
+  --color-secondary-500: var(--secondary-500);
+  --color-secondary-600: var(--secondary-600);
+  --color-secondary-700: var(--secondary-700);
+
+  --color-neutral-100: var(--neutral-100);
+  --color-neutral-200: var(--neutral-200);
+  --color-neutral-300: var(--neutral-300);
+  --color-neutral-400: var(--neutral-400);
+  --color-neutral-500: var(--neutral-500);
+  --color-neutral-600: var(--neutral-600);
+  --color-neutral-700: var(--neutral-700);
+  --color-neutral-800: var(--neutral-800);
+  --color-neutral-900: var(--neutral-900);
+  --color-neutral-1000: var(--neutral-1000);
+  --color-neutral-1100: var(--neutral-1100);
+
+  --color-error-200: var(--error-200);
+  --color-error-300: var(--error-300);
+  --color-error-400: var(--error-400);
+  --color-error-500: var(--error-500);
+  --color-error-600: var(--error-600);
+  --color-error-700: var(--error-700);
+  --color-error-800: var(--error-800);
+
+  --color-warning-200: var(--warning-200);
+  --color-warning-300: var(--warning-300);
+  --color-warning-400: var(--warning-400);
+  --color-warning-500: var(--warning-500);
+  --color-warning-600: var(--warning-600);
+  --color-warning-700: var(--warning-700);
+  --color-warning-800: var(--warning-800);
+
+  --color-success-200: var(--success-200);
+  --color-success-300: var(--success-300);
+  --color-success-400: var(--success-400);
+  --color-success-500: var(--success-500);
+  --color-success-600: var(--success-600);
+  --color-success-700: var(--success-700);
+  --color-success-800: var(--success-800);
+
+  --color-information-200: var(--information-200);
+  --color-information-300: var(--information-300);
+  --color-information-600: var(--information-600);
+  --color-information-700: var(--information-700);
+  --color-information-800: var(--information-800);
+
+  /* semantic (theme: Default) */
+  --color-heading: var(--text-default-heading);
+  --color-body: var(--text-default-body);
+  --color-caption: var(--text-default-caption);
+  --color-placeholder: var(--text-default-placeholder);
+  --color-page: var(--surface-page-secondary);
+  --color-surface: var(--foundations-white);
+  --color-surface-secondary: var(--surface-default-secondary);
+  --color-line: var(--border-default);
+
+  --radius-xs: var(--border-radius-50);
+  --radius-sm: var(--border-radius-100);
+  --radius-md: var(--border-radius-200);
+  --radius-lg: var(--border-radius-300);
+  --radius-full: var(--border-radius-round);
+
+  --text-h1: var(--type-heading-size-h1);
+  --text-h1--line-height: var(--type-heading-line-height-h1-line-height);
+  --text-h2: var(--type-heading-size-h2);
+  --text-h2--line-height: var(--type-heading-line-height-h2-line-height);
+  --text-h3: var(--type-heading-size-h3);
+  --text-h3--line-height: var(--type-heading-line-height-h3-line-height);
+  --text-h4: var(--type-heading-size-h4);
+  --text-h4--line-height: var(--type-heading-line-height-h4-line-height);
+  --text-h5: var(--type-heading-size-h5);
+  --text-h5--line-height: var(--type-heading-line-height-h5-line-height);
+  --text-h6: var(--type-heading-size-h6);
+  --text-h6--line-height: var(--type-heading-line-height-h6-line-height);
+  --text-p-lg: var(--type-paragraph-size-paragraph-lg);
+  --text-p-lg--line-height: 28px;
+  --text-p: var(--type-paragraph-size-paragraph);
+  --text-p--line-height: 24px;
+  --text-p-sm: var(--type-paragraph-size-paragraph-sm);
+  --text-p-sm--line-height: 20px;
+  --text-p-xs: var(--type-paragraph-size-paragraph-xsm);
+  --text-p-xs--line-height: 16px;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  background: var(--surface-page-secondary);
+  color: var(--text-default-body);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Thin scrollbar for horizontally scrolling chip rows / tables */
+.scrollbar-thin {
+  scrollbar-width: thin;
+  scrollbar-color: var(--neutral-500) transparent;
+}
+.scrollbar-thin::-webkit-scrollbar {
+  height: 6px;
+  width: 6px;
+}
+.scrollbar-thin::-webkit-scrollbar-thumb {
+  background: var(--neutral-500);
+  border-radius: 999px;
+}
+
+/* Native date input: hide default placeholder text on mobile Safari when empty */
+input[type="date"]::-webkit-datetime-edit {
+  color: inherit;
+}
+input[type="date"]:invalid::-webkit-datetime-edit {
+  color: var(--text-default-placeholder);
+}
+
+@media print {
+  .no-print {
+    display: none !important;
+  }
+  body {
+    background: #fff;
+  }
+}
