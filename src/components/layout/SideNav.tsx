@@ -146,7 +146,7 @@ export function SideNav({ open, onClose }: Props) {
   return (
     <>
       {/* Desktop */}
-      <aside className="hidden lg:block fixed inset-y-0 left-0 z-30 w-[280px] border-r border-line bg-white">
+      <aside className="hidden lg:block fixed inset-y-0 left-0 z-30 w-[280px] border-r border-line bg-surface">
         {nav}
       </aside>
 
@@ -167,7 +167,7 @@ export function SideNav({ open, onClose }: Props) {
         />
         <aside
           className={cn(
-            "absolute inset-y-0 left-0 w-[280px] max-w-[85vw] bg-white shadow-xl transition-transform duration-200",
+            "absolute inset-y-0 left-0 w-[280px] max-w-[85vw] bg-surface shadow-xl transition-transform duration-200",
             open ? "translate-x-0" : "-translate-x-full",
           )}
           role="dialog"

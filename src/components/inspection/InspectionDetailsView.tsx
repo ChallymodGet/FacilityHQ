@@ -125,7 +125,7 @@ export function InspectionDetailsView({ id }: Props) {
               Inspection Submitted
             </span>
           ) : (
-            <span className="inline-flex h-10 items-center justify-center rounded-sm border border-line bg-white px-4 text-p-sm font-medium text-caption">
+            <span className="inline-flex h-10 items-center justify-center rounded-sm border border-line bg-surface px-4 text-p-sm font-medium text-caption">
               Draft — not yet submitted
             </span>
           )}

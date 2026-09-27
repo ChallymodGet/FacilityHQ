@@ -21,7 +21,7 @@ interface Props {
 
 export function StatCard({ title, value, caption, icon, tone }: Props) {
   return (
-    <Card className="flex h-full flex-col justify-between p-3 sm:p-4 min-h-[120px] sm:min-h-[144px]">
+    <Card className="group flex h-full flex-col justify-between p-3 sm:p-4 min-h-[120px] sm:min-h-[144px] transition-shadow hover:shadow-[0_8px_24px_rgba(16,24,40,0.12)]">
       <div className="flex items-start justify-between gap-2 sm:gap-3">
         <span className="text-p-xs sm:text-p-sm font-medium text-heading leading-4 sm:leading-5">{title}</span>
         <span
@@ -35,7 +35,9 @@ export function StatCard({ title, value, caption, icon, tone }: Props) {
         </span>
       </div>
       <div>
-        <div className="text-h4 sm:text-h3 font-light text-caption leading-none">{value}</div>
+        <div className="text-[32px] leading-10 font-extrabold text-caption transition-colors group-hover:text-heading">
+          {value}
+        </div>
         <div className="mt-2 text-p-xs text-caption">{caption}</div>
       </div>
     </Card>

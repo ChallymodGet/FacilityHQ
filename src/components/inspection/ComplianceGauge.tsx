@@ -36,12 +36,14 @@ export function ComplianceGauge({ score, status, size = 88 }: Props) {
           fill="none"
           stroke={STROKE[status]}
           strokeWidth={stroke}
-          strokeLinecap="round"
+          strokeLinecap="butt"
           strokeDasharray={`${filled} ${c - filled}`}
           transform={`rotate(-90 ${size / 2} ${size / 2})`}
         />
       </svg>
-      <span className={cn("absolute text-h5 font-bold", TEXT[status])}>{score}%</span>
+      <span className={cn("absolute font-bold", size >= 120 ? "text-h3" : "text-h5", TEXT[status])}>
+        {score}%
+      </span>
     </div>
   );
 }

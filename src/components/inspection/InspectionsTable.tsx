@@ -11,9 +11,16 @@ interface Props {
   emptyMessage?: string;
   /** compact = dashboard "Recent Inspections" widget */
   compact?: boolean;
+  /** Records uses the raw ISO date; the dashboard uses "Sep 13, 2025". */
+  dateFormat?: "long" | "iso";
 }
 
-export function InspectionsTable({ inspections, emptyMessage = "No inspections yet.", compact }: Props) {
+export function InspectionsTable({
+  inspections,
+  emptyMessage = "No inspections yet.",
+  compact,
+  dateFormat = "long",
+}: Props) {
   if (!inspections.length) {
     return <p className="px-4 py-10 text-center text-p-sm text-caption">{emptyMessage}</p>;
   }
@@ -57,7 +64,9 @@ export function InspectionsTable({ inspections, emptyMessage = "No inspections y
                     {FACILITY_NAMES[i.facility]}
                   </td>
                   <td className="px-4 py-3 text-body whitespace-nowrap">{i.evaluator}</td>
-                  <td className="px-4 py-3 text-body whitespace-nowrap">{formatLongDate(i.inspectionDate)}</td>
+                  <td className="px-4 py-3 text-body whitespace-nowrap">
+                    {dateFormat === "iso" ? i.inspectionDate : formatLongDate(i.inspectionDate)}
+                  </td>
                   <td className={cn("px-4 py-3 font-medium whitespace-nowrap", scoreColor(status))}>
                     {i.status === "draft" ? "—" : `${score}%`}
                   </td>
@@ -92,7 +101,7 @@ export function InspectionsTable({ inspections, emptyMessage = "No inspections y
                   <div className="text-p-sm font-semibold text-heading">{i.id}</div>
                   <div className="mt-0.5 text-p-sm text-body">{FACILITY_NAMES[i.facility]}</div>
                   <div className="mt-1 text-p-xs text-caption">
-                    {i.evaluator} · {formatLongDate(i.inspectionDate)}
+                    {i.evaluator} · {dateFormat === "iso" ? i.inspectionDate : formatLongDate(i.inspectionDate)}
                   </div>
                 </div>
                 <div className="flex shrink-0 flex-col items-end gap-1.5">

@@ -53,7 +53,7 @@ export function ChecklistItemRow({ index, item, response, onRate, onComment }: P
             value={response?.comment ?? ""}
             onChange={(e) => onComment(item.id, e.target.value)}
             placeholder="Describe the issue found…"
-            className="mt-2 min-h-20 bg-white"
+            className="mt-2 min-h-20 bg-surface"
           />
         </div>
       ) : null}

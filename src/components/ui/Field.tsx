@@ -30,7 +30,7 @@ export function Field({ label, required, htmlFor, children, className, hint }: F
 }
 
 const control =
-  "h-12 w-full rounded-sm border border-line bg-white px-4 text-p-sm text-heading placeholder:text-placeholder focus:outline-none focus:border-primary-500 focus:ring-2 focus:ring-primary-200 disabled:bg-neutral-200 disabled:text-neutral-600";
+  "h-12 w-full rounded-sm border border-line bg-surface px-4 text-p-sm text-heading placeholder:text-placeholder focus:outline-none focus:border-primary-500 focus:ring-2 focus:ring-primary-200 disabled:bg-neutral-200 disabled:text-neutral-600";
 
 export function TextInput({ className, ...rest }: InputHTMLAttributes<HTMLInputElement>) {
   return <input className={cn(control, className)} {...rest} />;
@@ -47,7 +47,7 @@ export function Select({ className, placeholder, options, value, ...rest }: Sele
       <select
         className={cn(
           control,
-          "appearance-none pr-10",
+          "select-control appearance-none pr-10 cursor-pointer transition-colors hover:bg-surface-secondary",
           !value && "text-placeholder",
           className,
         )}
@@ -77,7 +77,7 @@ export function Textarea({ className, ...rest }: TextareaHTMLAttributes<HTMLText
   return (
     <textarea
       className={cn(
-        "w-full min-h-24 rounded-sm border border-line bg-white px-3 py-3 text-p-sm text-heading placeholder:text-placeholder focus:outline-none focus:border-primary-500 focus:ring-2 focus:ring-primary-200 resize-y",
+        "w-full min-h-24 rounded-sm border border-line bg-surface px-3 py-3 text-p-sm text-heading placeholder:text-placeholder focus:outline-none focus:border-primary-500 focus:ring-2 focus:ring-primary-200 resize-y",
         className,
       )}
       {...rest}

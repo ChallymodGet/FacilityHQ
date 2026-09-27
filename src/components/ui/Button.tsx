@@ -9,9 +9,9 @@ const VARIANT: Record<Variant, string> = {
   primary:
     "bg-primary-500 text-white hover:bg-primary-600 active:bg-primary-700 disabled:bg-neutral-400 disabled:text-neutral-600 border border-transparent",
   outline:
-    "bg-white text-heading border border-neutral-900 hover:bg-neutral-300 active:bg-neutral-400 disabled:text-neutral-500 disabled:border-neutral-400",
+    "bg-surface text-heading border border-neutral-900 hover:bg-neutral-300 active:bg-neutral-400 disabled:text-neutral-500 disabled:border-neutral-400",
   "outline-primary":
-    "bg-white text-primary-500 border border-primary-500 hover:bg-primary-100 active:bg-primary-200 disabled:text-neutral-500 disabled:border-neutral-400",
+    "bg-surface text-primary-500 border border-primary-500 hover:bg-primary-100 active:bg-primary-200 disabled:text-neutral-500 disabled:border-neutral-400",
   ghost:
     "bg-transparent text-body hover:bg-neutral-300 active:bg-neutral-400 border border-transparent",
 };

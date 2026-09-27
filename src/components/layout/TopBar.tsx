@@ -1,6 +1,7 @@
 "use client";
 
-import { Bell, Menu, Search, Sun } from "lucide-react";
+import { Bell, Menu, Moon, Search, Sun } from "lucide-react";
+import { useTheme } from "@/lib/theme";
 import { CURRENT_USER } from "@/lib/user";
 
 interface Props {
@@ -8,8 +9,11 @@ interface Props {
 }
 
 export function TopBar({ onMenu }: Props) {
+  const { theme, toggleTheme } = useTheme();
+  const dark = theme === "dark";
+
   return (
-    <header className="sticky top-0 z-20 h-16 sm:h-20 border-b border-line bg-white no-print">
+    <header className="sticky top-0 z-20 h-16 sm:h-20 border-b border-line bg-surface no-print">
       <div className="flex h-full items-center gap-3 px-4 sm:px-6">
         <button
           type="button"
@@ -20,7 +24,7 @@ export function TopBar({ onMenu }: Props) {
           <Menu className="size-5" />
         </button>
 
-        <label className="relative flex h-11 sm:h-12 w-full max-w-[335px] items-center rounded-sm border border-line bg-white focus-within:border-primary-500 focus-within:ring-2 focus-within:ring-primary-200">
+        <label className="relative flex h-11 sm:h-12 w-full max-w-[335px] items-center rounded-sm border border-line bg-surface focus-within:border-primary-500 focus-within:ring-2 focus-within:ring-primary-200">
           <Search className="absolute left-4 size-5 text-heading" strokeWidth={1.75} aria-hidden />
           <input
             type="search"
@@ -45,10 +49,17 @@ export function TopBar({ onMenu }: Props) {
           </button>
           <button
             type="button"
+            onClick={toggleTheme}
             className="inline-flex size-10 items-center justify-center rounded-sm text-heading hover:bg-neutral-300"
-            aria-label="Toggle theme"
+            aria-label={dark ? "Switch to light theme" : "Switch to dark theme"}
+            aria-pressed={dark}
+            title={dark ? "Light theme" : "Dark theme"}
           >
-            <Sun className="size-5" strokeWidth={1.75} />
+            {dark ? (
+              <Sun className="size-5" strokeWidth={1.75} />
+            ) : (
+              <Moon className="size-5" strokeWidth={1.75} />
+            )}
           </button>
         </div>
       </div>

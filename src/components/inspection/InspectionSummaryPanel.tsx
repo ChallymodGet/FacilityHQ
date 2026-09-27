@@ -54,6 +54,12 @@ export function InspectionSummaryPanel({ inspection }: Props) {
             <li key={s.section.key}>
               <a
                 href={`#section-${s.section.key}`}
+                onClick={(e) => {
+                  const el = document.getElementById(`section-${s.section.key}`);
+                  if (!el) return;
+                  e.preventDefault();
+                  el.scrollIntoView({ behavior: "smooth", block: "start" });
+                }}
                 className="flex items-center justify-between gap-2 text-p-xs hover:text-primary-600"
               >
                 <span className="truncate text-body">{s.section.shortName}</span>

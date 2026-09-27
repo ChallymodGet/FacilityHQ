@@ -58,7 +58,7 @@ export function RatingChip({ rating, selected, onSelect, name }: Props) {
         "focus-visible:outline-2 focus-visible:outline-offset-1 focus-visible:outline-primary-500",
         selected
           ? RATING_TONE[rating].selected
-          : "border-line bg-white text-body hover:border-neutral-600 hover:bg-neutral-200",
+          : "border-line bg-surface text-body hover:border-neutral-600 hover:bg-neutral-200",
       )}
     >
       {rating}

@@ -75,15 +75,16 @@
   --color-caption: var(--text-default-caption);
   --color-placeholder: var(--text-default-placeholder);
   --color-page: var(--surface-page-secondary);
-  --color-surface: var(--foundations-white);
+  --color-surface: var(--surface-card);
   --color-surface-secondary: var(--surface-default-secondary);
   --color-line: var(--border-default);
 
-  --radius-xs: var(--border-radius-50);
-  --radius-sm: var(--border-radius-100);
-  --radius-md: var(--border-radius-200);
-  --radius-lg: var(--border-radius-300);
-  --radius-full: var(--border-radius-round);
+  /* Square corners everywhere. */
+  --radius-xs: var(--border-radius-none);
+  --radius-sm: var(--border-radius-none);
+  --radius-md: var(--border-radius-none);
+  --radius-lg: var(--border-radius-none);
+  --radius-full: var(--border-radius-none);
 
   --text-h1: var(--type-heading-size-h1);
   --text-h1--line-height: var(--type-heading-line-height-h1-line-height);
@@ -105,6 +106,59 @@
   --text-p-sm--line-height: 20px;
   --text-p-xs: var(--type-paragraph-size-paragraph-xsm);
   --text-p-xs--line-height: 16px;
+}
+
+:root {
+  --surface-card: var(--foundations-white);
+  color-scheme: light;
+}
+
+/* Dark theme. Screen only, so printed reports stay light. */
+@media screen {
+  :root[data-theme="dark"] {
+    color-scheme: dark;
+
+    --surface-card: #1a1f2b;
+    --surface-page-secondary: #11141b;
+    --surface-default-secondary: #252b37;
+    --border-default: #2e3441;
+
+    --text-default-heading: #f5f5f6;
+    --text-default-body: #d5d7da;
+    --text-default-caption: #a4a7ae;
+    --text-default-placeholder: #717680;
+
+    --neutral-100: #151922;
+    --neutral-200: #1f2430;
+    --neutral-300: #252b37;
+    --neutral-400: #2f3542;
+    --neutral-500: #3d4452;
+    --neutral-600: #5b6270;
+    --neutral-700: #8a909b;
+    --neutral-800: #6b7280;
+    --neutral-900: #9aa0aa;
+
+    --primary-100: #3a2114;
+    --primary-200: #4d2a17;
+    --primary-300: #6b3517;
+
+    --success-200: #11281e;
+    --success-300: #1a3d2c;
+    --success-800: #32d583;
+
+    --warning-200: #2e2410;
+    --warning-300: #3d3014;
+    --warning-400: #5a4515;
+    --warning-800: #fdb022;
+
+    --error-200: #2e1719;
+    --error-300: #4a2023;
+    --error-800: #f97066;
+
+    --information-200: #15223a;
+    --information-300: #1c2f52;
+    --information-800: #93c5fd;
+  }
 }
 
 html,
@@ -130,7 +184,52 @@ body {
 }
 .scrollbar-thin::-webkit-scrollbar-thumb {
   background: var(--neutral-500);
-  border-radius: 999px;
+}
+
+/*
+ * Dropdowns: browsers that support customizable <select> get a styled option
+ * list; others keep the native picker (declarations below are ignored).
+ */
+select.select-control {
+  appearance: base-select;
+}
+@supports (appearance: base-select) {
+  select.select-control {
+    display: flex;
+    align-items: center;
+  }
+}
+select.select-control::picker-icon {
+  display: none;
+}
+select.select-control::picker(select) {
+  appearance: base-select;
+  margin-top: 4px;
+  padding: 4px 0;
+  border: 1px solid var(--border-default);
+  border-radius: 0;
+  background: var(--surface-card);
+  color: var(--text-default-heading);
+  box-shadow: 0 12px 24px rgba(16, 24, 40, 0.12);
+}
+select.select-control option {
+  padding: 10px 16px;
+  color: var(--text-default-heading);
+  font-size: var(--type-paragraph-size-paragraph-sm);
+}
+select.select-control option:hover,
+select.select-control option:focus-visible {
+  background: var(--surface-default-secondary);
+  outline: none;
+}
+select.select-control option:checked {
+  font-weight: 600;
+}
+select.select-control option::checkmark {
+  display: none;
+}
+select.select-control option:disabled {
+  color: var(--text-default-placeholder);
 }
 
 /* Native date input: hide default placeholder text on mobile Safari when empty */

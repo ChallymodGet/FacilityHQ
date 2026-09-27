@@ -1,7 +1,9 @@
 import type { Metadata, Viewport } from "next";
 import { Host_Grotesk } from "next/font/google";
+import Script from "next/script";
 import "./globals.css";
 import { InspectionsProvider } from "@/lib/store";
+import { THEME_INIT_SCRIPT } from "@/lib/theme-script";
 
 const hostGrotesk = Host_Grotesk({
   variable: "--font-host-grotesk",
@@ -24,8 +26,11 @@ export const viewport: Viewport = {
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html lang="en" className={`${hostGrotesk.variable} h-full antialiased`}>
+    <html lang="en" className={`${hostGrotesk.variable} h-full antialiased`} suppressHydrationWarning>
       <body className="min-h-full flex flex-col">
+        <Script id="theme-init" strategy="beforeInteractive">
+          {THEME_INIT_SCRIPT}
+        </Script>
         <InspectionsProvider>{children}</InspectionsProvider>
       </body>
     </html>

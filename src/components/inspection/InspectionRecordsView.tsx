@@ -8,21 +8,21 @@ import { Card } from "@/components/ui/Card";
 import { Select } from "@/components/ui/Field";
 import { InspectionsTable } from "./InspectionsTable";
 import { LoadingCard } from "./States";
-import { CHECKLIST_SECTIONS, FACILITY_NAMES } from "@/lib/checklist";
+import { CHECKLIST_SECTIONS, EVALUATORS, FACILITY_NAMES } from "@/lib/checklist";
 import { overallStatus } from "@/lib/scoring";
 import { useInspections } from "@/lib/store";
 import type { ComplianceStatus, FacilityKey } from "@/lib/types";
 
-const STATUS_OPTIONS = ["All Status", "Compliant", "Partial", "Non-Compliant", "Draft"] as const;
-const DATE_OPTIONS = ["Newest first", "Oldest first"] as const;
+const STATUS_OPTIONS = ["All Statuses", "Compliant", "Partial", "Non-Compliant", "Draft"] as const;
 const FACILITY_OPTIONS = ["All Facilities", ...CHECKLIST_SECTIONS.map((s) => s.name)];
+const EVALUATOR_OPTIONS = ["All Evaluators", ...EVALUATORS];
 
 export function InspectionRecordsView() {
   const { inspections, hydrated } = useInspections();
   const [query, setQuery] = useState("");
   const [facility, setFacility] = useState<string>(FACILITY_OPTIONS[0]);
+  const [evaluator, setEvaluator] = useState<string>(EVALUATOR_OPTIONS[0]);
   const [status, setStatus] = useState<string>(STATUS_OPTIONS[0]);
-  const [order, setOrder] = useState<string>(DATE_OPTIONS[0]);
 
   const rows = useMemo(() => {
     const q = query.trim().toLowerCase();
@@ -31,7 +31,8 @@ export function InspectionRecordsView() {
     );
     const list = inspections.filter((i) => {
       if (facilityKey && i.facility !== facilityKey) return false;
-      if (status !== "All Status") {
+      if (evaluator !== "All Evaluators" && i.evaluator !== evaluator) return false;
+      if (status !== "All Statuses") {
         if (status === "Draft") {
           if (i.status !== "draft") return false;
         } else if (i.status !== "submitted" || overallStatus(i) !== (status as ComplianceStatus)) {
@@ -47,11 +48,10 @@ export function InspectionRecordsView() {
     list.sort((a, b) => {
       const cmp = a.inspectionDate < b.inspectionDate ? -1 : a.inspectionDate > b.inspectionDate ? 1 : 0;
       const tie = a.createdAt < b.createdAt ? -1 : a.createdAt > b.createdAt ? 1 : 0;
-      const v = cmp || tie;
-      return order === "Newest first" ? -v : v;
+      return -(cmp || tie);
     });
     return list;
-  }, [inspections, query, facility, status, order]);
+  }, [inspections, query, facility, evaluator, status]);
 
   return (
     <div className="flex flex-col gap-6">
@@ -64,20 +64,20 @@ export function InspectionRecordsView() {
             leadingIcon={<Plus className="size-4" strokeWidth={2} />}
             className="w-full sm:w-auto sm:min-w-[234px]"
           >
-            Start New Inspection
+            New Inspection
           </ButtonLink>
         }
       />
 
       <Card className="p-2 sm:p-3">
         <div className="flex flex-col gap-3 lg:flex-row lg:items-center">
-          <label className="relative flex h-12 flex-1 items-center rounded-sm border border-line bg-white focus-within:border-primary-500 focus-within:ring-2 focus-within:ring-primary-200">
+          <label className="relative flex h-12 flex-1 items-center rounded-sm border border-line bg-surface focus-within:border-primary-500 focus-within:ring-2 focus-within:ring-primary-200">
             <Search className="absolute left-4 size-4 text-heading" strokeWidth={1.75} aria-hidden />
             <input
               type="search"
               value={query}
               onChange={(e) => setQuery(e.target.value)}
-              placeholder="Search by inspection ID, facility, evaluator or location…"
+              placeholder="Search by ID or facility..."
               className="h-full w-full bg-transparent pl-12 pr-4 text-p-sm text-heading placeholder:text-placeholder focus:outline-none"
               aria-label="Search records"
             />
@@ -92,18 +92,18 @@ export function InspectionRecordsView() {
               className="lg:w-[205px] h-12 lg:h-10"
             />
             <Select
+              aria-label="Filter by evaluator"
+              options={EVALUATOR_OPTIONS}
+              value={evaluator}
+              onChange={(e) => setEvaluator(e.target.value)}
+              className="lg:w-[160px] h-12 lg:h-10"
+            />
+            <Select
               aria-label="Filter by status"
               options={STATUS_OPTIONS}
               value={status}
               onChange={(e) => setStatus(e.target.value)}
-              className="lg:w-[140px] h-12 lg:h-10"
-            />
-            <Select
-              aria-label="Sort by date"
-              options={DATE_OPTIONS}
-              value={order}
-              onChange={(e) => setOrder(e.target.value)}
-              className="lg:w-[140px] h-12 lg:h-10"
+              className="lg:w-[150px] h-12 lg:h-10"
             />
           </div>
         </div>
@@ -111,7 +111,7 @@ export function InspectionRecordsView() {
 
       {hydrated ? (
         <Card className="overflow-hidden">
-          <InspectionsTable inspections={rows} emptyMessage="No records match your filters." />
+          <InspectionsTable inspections={rows} dateFormat="iso" emptyMessage="No records match your filters." />
         </Card>
       ) : (
         <LoadingCard />

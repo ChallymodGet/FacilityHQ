@@ -8,7 +8,7 @@ export function Card({
 }: HTMLAttributes<HTMLDivElement>) {
   return (
     <div
-      className={cn("bg-white border border-line rounded-md", className)}
+      className={cn("bg-surface border border-line rounded-md", className)}
       {...rest}
     >
       {children}

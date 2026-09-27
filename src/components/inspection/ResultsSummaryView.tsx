@@ -70,7 +70,7 @@ export function ResultsSummaryView({ id }: Props) {
         <Card className="flex flex-col items-center p-5 text-center">
           <h2 className="text-p-lg font-semibold text-heading">Overall Compliance</h2>
           <div className="mt-4">
-            <ComplianceGauge score={score} status={status} />
+            <ComplianceGauge score={score} status={status} size={140} />
           </div>
           <StatusBadge status={status} size="md" className="mt-4" />
           <p className="mt-3 text-p-xs text-caption">
@@ -108,7 +108,7 @@ export function ResultsSummaryView({ id }: Props) {
               <div key={c.section.key} className="rounded-sm border border-line bg-neutral-200 p-3">
                 <div className="flex items-start justify-between gap-3">
                   <span className="text-p-xs font-semibold text-heading">{c.section.name}</span>
-                  <span className={cn("text-p-lg font-bold leading-6", c.rated ? scoreColor(catStatus) : "text-primary-500")}>
+                  <span className={cn("text-p-lg font-bold leading-6", scoreColor(catStatus))}>
                     {c.score}%
                   </span>
                 </div>
@@ -163,7 +163,7 @@ export function ResultsSummaryView({ id }: Props) {
       </div>
 
       {/* Mobile sticky actions */}
-      <div className="lg:hidden fixed inset-x-0 bottom-0 z-20 border-t border-line bg-white p-3 pb-[max(env(safe-area-inset-bottom),12px)] no-print">
+      <div className="lg:hidden fixed inset-x-0 bottom-0 z-20 border-t border-line bg-surface p-3 pb-[max(env(safe-area-inset-bottom),12px)] no-print">
         <div className="mx-auto flex max-w-[1104px] items-center gap-2">
           <Button
             variant="outline-primary"

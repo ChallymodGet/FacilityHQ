@@ -17,7 +17,11 @@ export function ChecklistSection({ section, inspection, onRate, onComment }: Pro
   const pct = (rated / section.items.length) * 100;
 
   return (
-    <Card id={`section-${section.key}`} className="scroll-mt-40 overflow-hidden">
+    <Card
+      id={`section-${section.key}`}
+      className="overflow-hidden"
+      style={{ scrollMarginTop: "var(--checklist-scroll-offset, 160px)" }}
+    >
       <div className="flex items-center justify-between gap-4 px-4 py-3.5">
         <div className="min-w-0 flex-1">
           <h2 className="text-p font-semibold text-heading leading-5">{section.name}</h2>
